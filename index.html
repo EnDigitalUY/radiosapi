@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Visor de estaciones de radio</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+	<div class="container mt-5">
+		<h2>Visor de estaciones de radio</h2>
+		<hr>
+
+		<div class="list-group">
+
+			<!-- Aquí se agregan los elementos de la lista de estaciones de radio -->
+			<!-- Se debe reemplazar "radios.json" con el nombre del archivo JSON que contenga la lista de estaciones -->
+			<!-- El archivo JSON debe contener un array de objetos con las propiedades "name", "urlRadio" y "urlLogo" -->
+			<!-- Ejemplo: [{ "name": "Radio X", "urlRadio": "http://streaming.com/radiox", "urlLogo": "http://logo.com/radiox.png" }] -->
+			<!-- El siguiente código HTML se generará dinámicamente para cada objeto del array -->
+			<!-- Cada objeto se mostrará como un elemento de la lista con su nombre, logo y un reproductor de audio -->
+			
+			 <script>
+				$(document).ready(function() {
+					$.getJSON("radio.json", function(data) {
+						$.each(data, function(i, radio) {
+							var radioItem = '<a href="#" class="list-group-item list-group-item-action">' +
+								'<div class="d-flex align-items-center">' +
+									'<img src="' + radio.urlLogo + '" alt="' + radio.name + ' logo" style="width: 150px;height: 150px;" class="mr-3">' +
+									'<div class="flex-grow-1">' +
+										'<h5 class="mb-1">' + radio.name + '</h5>' + '<h6 class="mb-1">' + radio.subtitle + '</h6>' +
+										'<audio src="' + radio.urlRadio + '" controls></audio>' +
+									'</div>' +
+								'</div>' +
+							'</a>';
+							$(".list-group").append(radioItem);
+						});
+					});
+				});
+			</script>
+
+		</div>
+
+	</div>
+
+</body>
+</html>
